@@ -1,26 +1,50 @@
 # DİJİTAL METİN
-Kullanıcının yazdığı metni, #, *, $, %, ...vb özel karakterlerle 5 veya daha fazla satır yüksekliğinde dijital metne çevirmeye çalışan python kodu.
+Kullanıcının yazdığı metni #, *, $, %, ...vb karakterlerle 9 satır yüksekliğinde metne çeviren python kodu.
 
 ### Örnek metin ve çıktılar;
 
 ```
-metni yazın: halil
+metin yazın: halil
 
-#   # ##### #     # #     
-#   # #   # #       #     
-##### ##### #     # #     
-#   # #   # #     # #     
-#   # #   # ##### # ##### 
+#   #    #    #        #    #      
+#   #   # #   #             #      
+#   #  #   #  #      #####  #      
+#   #  #   #  #        #    #      
+#####  #   #  #        #    #      
+#   #  #####  #        #    #      
+#   #  #   #  #        #    #      
+#   #  #   #  #        #    #      
+#   #  #   #  #####  #####  ##### 
 
-$   $ $$$$$ $     $ $     
-$   $ $   $ $       $     
-$$$$$ $$$$$ $     $ $     
-$   $ $   $ $     $ $     
-$   $ $   $ $$$$$ $ $$$$$
 
-%   % %%%%% %     % %     
-%   % %   % %       %     
-%%%%% %%%%% %     % %     
-%   % %   % %     % %     
-%   % %   % %%%%% % %%%%%
+*   *    *    *        *    *      
+*   *   * *   *             *      
+*   *  *   *  *      *****  *      
+*   *  *   *  *        *    *      
+*****  *   *  *        *    *      
+*   *  *****  *        *    *      
+*   *  *   *  *        *    *      
+*   *  *   *  *        *    *      
+*   *  *   *  *****  *****  ***** 
+
+
+X   X    X    X        X    X      
+X   X   X X   X             X      
+X   X  X   X  X      XXXXX  X      
+X   X  X   X  X        X    X      
+XXXXX  X   X  X        X    X      
+X   X  XXXXX  X        X    X      
+X   X  X   X  X        X    X      
+X   X  X   X  X        X    X      
+X   X  X   X  XXXXX  XXXXX  XXXXX
+
+=   =    =    =        =    =      
+=   =   = =   =             =      
+=   =  =   =  =      =====  =      
+=   =  =   =  =        =    =      
+=====  =   =  =        =    =      
+=   =  =====  =        =    =      
+=   =  =   =  =        =    =      
+=   =  =   =  =        =    =      
+=   =  =   =  =====  =====  ===== 
 ```
