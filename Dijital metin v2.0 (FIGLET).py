@@ -7,12 +7,9 @@ Kullanılabilir Yazıtipleri;
  3. Doh              8. Isometric4
  4. Epic             9. Standard
  5. Isometric1      10. Univers
-""")
 
-secim = input("Listedeki yazı tiplerinden birini seçin (Sadece sayı değeri girin) : ") # Kullanıcıdan Menü seçeneklerinden birini seçmesi isteniyor.
-yazitipi_sec = {"1" : "banner3", "2" : "colossal" , "3" : "doh" ,"4" : "epic" , "5" : "isometric1", "6" : "isometric2", "7" : "isometric3" , "8" : "isometric4" , "9" : "standard", "10" : "univers"}                       # Seçime karşılık gelen yazıtipini sözlük ile belirle.
-yazitipi = yazitipi_sec[secim]                      # Seçilen yazıtipinin adı.
-yazitipi_yolu = "fonts/" + yazitipi + ".flf"        # Yazıtipinin tam yolu.
+ Q. ÇIKIŞ
+""")
 
 def ky():                                           # Yazıtipini oluşturan karakterlerin yuksekligi (her karakterin kaç satırdan oluştuğunu) hesaplayan fonksiyon.
     yukseklik = 0                                   # Karakter Yüksekliği (satır sayısı) 
@@ -75,27 +72,48 @@ def alfabe_sozluk():
     return alfabe                                   # Oluşturulan alfabe isimli sözlüğü fonksiyona değer olarak ata.
 
 def sonuc():                                        # Kullanıcıdan Yazitipi menüsünden seçim yapmasını ve bir metin yazmasını isteyen; Yazılan metni, seçilen yazıtipi kodlarına çevirerek ekrana yazdıran fonksiyon.
-    sozluk = alfabe_sozluk()                        # alfabe_sozluk() fonksiyonunu çalıştır ve sozluk isimli değişkene ata. 
-    yuk = ky()                                      # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
-    girdi = input("Metni yazın: ")                  # Kullanıcıdan bir metin girmesini iste.
-    sonuc = ""                                      # sonuc isimli boş bir string oluştur.
+
+    yuk = ky()                                  # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
+    sozluk = alfabe_sozluk()                    # alfabe_sozluk() fonksiyonunu çalıştır ve sozluk isimli değişkene ata.                                       
+    girdi = input("Metni yazın: ")              # Kullanıcıdan bir metin girmesini iste.
+    sonuc = ""                                  # sonuc isimli boş bir string oluştur.
     
-    if secim != "9":                                # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
+    if secim != "9":                            # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
         turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
 
-        for i in range(1, yuk+1):                   # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
+        for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
             for harf in girdi:
                 if harf in turkce_karakterler.keys():   # Girdi içerisinde Türkçe karakter varsa, kod hata vermesin alfabede ona yakın karakteri kullansın. Ör: ş yerine s, Ğ yerine G, ...vb
                     harf = turkce_karakterler[harf]
                 sonuc += sozluk[harf + str(i)] + "   "
             sonuc += "\n"
     
-    else:                                           # "standart" isimli yazıtipi içerisinden 331 karakter var. Bu durumda, girdide yazılan kelimeleri olduğu gibi (karakterleri değiştirmeden) kullan.
-        for i in range(1, yuk+1):                   # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
+    else:                                       # "standart" isimli yazıtipi içerisinden 331 karakter var. Bu durumda, girdide yazılan kelimeleri olduğu gibi (karakterleri değiştirmeden) kullan.
+        for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
             for harf in girdi:
                 sonuc += sozluk[harf + str(i)] + "   "
             sonuc += "\n"
 
-    print(sonuc.replace("$", " "))                  # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
+    print(sonuc.replace("$", " "))              # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
 
-sonuc()                                             # sonuc() fonksiyonunu çalıştır.
+
+# print(yazitipi_sec.keys())
+
+while True:
+
+    secim = input("Kullanmak İstediğiniz Yazıtipine Ait Sıra Numarasını Yazın: ") # Kullanıcıdan Menü seçeneklerinden birini seçmesi isteniyor.
+    yazitipi_sec = {"1" : "banner3", "2" : "colossal" , "3" : "doh" ,"4" : "epic" , "5" : "isometric1", "6" : "isometric2", "7" : "isometric3" , "8" : "isometric4" , "9" : "standard", "10" : "univers"}                       # Seçime karşılık gelen yazıtipini sözlük ile belirle.
+    
+    if secim == "Q" or secim == "q":
+        print(".:: PROGRAM SONLANDI ! ::.")
+        break
+
+    elif secim not in yazitipi_sec.keys():
+        print("Geçerli bir seçim yapmalısınız!")
+    
+    else:
+
+        yazitipi = yazitipi_sec[secim]                      # Seçilen yazıtipinin adı.
+        yazitipi_yolu = "fonts/" + yazitipi + ".flf"        # Yazıtipinin tam yolu.
+        
+        sonuc()                                             # sonuc() fonksiyonunu çalıştır.
