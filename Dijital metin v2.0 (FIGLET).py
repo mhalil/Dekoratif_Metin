@@ -53,15 +53,21 @@ def listele():                                      # Belirtilen yazitipi dosyas
 
 def alfabe_sozluk():
     karakterler = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÂÖÜâöüβ""" # Yazıtipi dosyalarında bulunan sıralı karakter bilgisi.
+    karakterler_standard = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÂÖÜâöüβ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſˇ˘˙˛˝""" # "STANDARD" isimli Yazıtipi dosyasında bulunan sıralı karakter bilgisi.
     
     krt_yuk = ky()                                  # Karakter YÜksekliği değerini ky() fonksiyonun çalıştırarak hesapla ve krt_yuk değişkenine ata.
     alfabe_kod = listele()                          # Alfabeye ait kodları listele() fonksiyonun çalıştırarak hesapla ve alfabe_kod değişkenine ata.
     alfabe_key = list()                             # alfabe_key isimi boş bir liste oluştur.
     alfabe = dict()                                 # alfabe isimi boş bir sözlük yapısı oluştur.
     
-    for k in karakterler:                           # Karakterlere sayı numarası eklenip alfabe_key listesine kaydeden döngü yapısı.
-        for l in range(1,krt_yuk+1):                # Sayılar 1'den başlayarak karakter (satır) yüksekliğine kadar devam edecek.
-            alfabe_key.append(k+str(l))             # listeye ekle. Ör: A1, A2, A3, ..., z1, z2, z3...vb
+    if secim == "9":
+        for k in karakterler_standard:              # Karakterlere sayı numarası eklenip alfabe_key listesine kaydeden döngü yapısı.
+            for l in range(1,krt_yuk+1):            # Sayılar 1'den başlayarak karakter (satır) yüksekliğine kadar devam edecek.
+                alfabe_key.append(k+str(l))         # listeye ekle. Ör: A1, A2, A3, ..., z1, z2, z3...vb
+    else:        
+        for k in karakterler:                       # Karakterlere sayı numarası eklenip alfabe_key listesine kaydeden döngü yapısı.
+            for l in range(1,krt_yuk+1):            # Sayılar 1'den başlayarak karakter (satır) yüksekliğine kadar devam edecek.
+                alfabe_key.append(k+str(l))         # listeye ekle. Ör: A1, A2, A3, ..., z1, z2, z3...vb
 
     for i in range(len(alfabe_kod)):                # alfabe_kod listesindeki öğeleri, alfabe_key listesindek öğelerle sırasına uygun olarak eşleştirip alfabe isimli sözlüğe ekleyen döngü yapısı. Ör: {'a1' : '## # #' }
         alfabe[alfabe_key[i]] = alfabe_kod[i]
@@ -73,15 +79,22 @@ def sonuc():                                        # Kullanıcıdan Yazitipi me
     yuk = ky()                                      # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
     girdi = input("Metni yazın: ")                  # Kullanıcıdan bir metin girmesini iste.
     sonuc = ""                                      # sonuc isimli boş bir string oluştur.
-    turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}
+    
+    if secim != "9":                                # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
+        turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
 
-    for i in range(1, yuk+1):                       # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
-        for harf in girdi:
-            if harf in turkce_karakterler.keys():   # Girdi içerisinde Türkçe karakter varsa, kod hata vermesin alfabede ona yakın karakteri kullansın. Ör: ş yerine s, Ğ yerine G, ...vb
-                harf = turkce_karakterler[harf]
-           
-            sonuc += sozluk[harf + str(i)] + "   "
-        sonuc += "\n"
+        for i in range(1, yuk+1):                   # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
+            for harf in girdi:
+                if harf in turkce_karakterler.keys():   # Girdi içerisinde Türkçe karakter varsa, kod hata vermesin alfabede ona yakın karakteri kullansın. Ör: ş yerine s, Ğ yerine G, ...vb
+                    harf = turkce_karakterler[harf]
+                sonuc += sozluk[harf + str(i)] + "   "
+            sonuc += "\n"
+    
+    else:                                           # "standart" isimli yazıtipi içerisinden 331 karakter var. Bu durumda, girdide yazılan kelimeleri olduğu gibi (karakterleri değiştirmeden) kullan.
+        for i in range(1, yuk+1):                   # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
+            for harf in girdi:
+                sonuc += sozluk[harf + str(i)] + "   "
+            sonuc += "\n"
 
     print(sonuc.replace("$", " "))                  # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
 
