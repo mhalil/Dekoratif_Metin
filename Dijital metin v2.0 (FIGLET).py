@@ -2,19 +2,15 @@
 print("""
 Kullanılabilir Yazıtipleri;
 **************************
-1. Banner3
-2. Colossal
-3. Doh
-4. Epic
-5. Isometric1
-6. Isometric2
-7. Isometric3
-8. Isometric4
-9. Univers
+ 1. Banner3          6. Isometric2
+ 2. Colossal         7. Isometric3
+ 3. Doh              8. Isometric4
+ 4. Epic             9. Standard
+ 5. Isometric1      10. Univers
 """)
 
 secim = input("Listedeki yazı tiplerinden birini seçin (Sadece sayı değeri girin) : ") # Kullanıcıdan Menü seçeneklerinden birini seçmesi isteniyor.
-yazitipi_sec = {"1" : "banner3", "2" : "colossal" , "3" : "doh" ,"4" : "epic" , "5" : "isometric1", "6" : "isometric2", "7" : "isometric3" , "8" : "isometric4" , "9" : "univers"}      # Seçime karşılık gelen yazıtipini sözlük ile belirle.
+yazitipi_sec = {"1" : "banner3", "2" : "colossal" , "3" : "doh" ,"4" : "epic" , "5" : "isometric1", "6" : "isometric2", "7" : "isometric3" , "8" : "isometric4" , "9" : "standard", "10" : "univers"}                       # Seçime karşılık gelen yazıtipini sözlük ile belirle.
 yazitipi = yazitipi_sec[secim]                      # Seçilen yazıtipinin adı.
 yazitipi_yolu = "fonts/" + yazitipi + ".flf"        # Yazıtipinin tam yolu.
 
@@ -77,9 +73,13 @@ def sonuc():                                        # Kullanıcıdan Yazitipi me
     yuk = ky()                                      # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
     girdi = input("Metni yazın: ")                  # Kullanıcıdan bir metin girmesini iste.
     sonuc = ""                                      # sonuc isimli boş bir string oluştur.
+    turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}
 
     for i in range(1, yuk+1):                       # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
         for harf in girdi:
+            if harf in turkce_karakterler.keys():   # Girdi içerisinde Türkçe karakter varsa, kod hata vermesin alfabede ona yakın karakteri kullansın. Ör: ş yerine s, Ğ yerine G, ...vb
+                harf = turkce_karakterler[harf]
+           
             sonuc += sozluk[harf + str(i)] + "   "
         sonuc += "\n"
 
