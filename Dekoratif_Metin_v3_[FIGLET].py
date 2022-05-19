@@ -73,7 +73,7 @@ def donustur_yatay():
 
     yuk = ky()                                  # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
     sozluk = alfabe_sozluk()                    # alfabe_sozluk() fonksiyonunu çalıştır ve sozluk isimli değişkene ata.                                       
-    girdi_metni = girdi.get()                   # Kullanıcıdan bir metin girmesini iste.
+    girdi_metni = girdi.get()                   # kullanıcının girdiği metni al.
     sonuc = ""                                  # sonuc isimli boş bir string oluştur.
     
     y_tipi_adi = yazitipi.get()                 # Açılır listede seçili olan yazıtipi adı
@@ -94,15 +94,14 @@ def donustur_yatay():
                 sonuc += sozluk[harf + str(i)] + "   "
             sonuc += "\n"
         
-    suslu_metin = sonuc.replace("$", " ")        # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
-    cikti.insert(tk.END, suslu_metin)
+    dekoratif_metin = sonuc.replace("$", " ")        # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
+    cikti.insert(tk.END, dekoratif_metin)
 
 def donustur_dikey():
 
     yuk = ky()                                  # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
     sozluk = alfabe_sozluk()                    # alfabe_sozluk() fonksiyonunu çalıştır ve sozluk isimli değişkene ata.                                       
-    girdi_metni = girdi.get()                   # Kullanıcıdan bir metin girmesini iste.
-    sonuc = ""                                  # sonuc isimli boş bir string oluştur.
+    girdi_metni = girdi.get()                   # kullanıcının girdiği metni al.
     
     y_tipi_adi = yazitipi.get()                 # Açılır listede seçili olan yazıtipi adı
 
@@ -113,19 +112,22 @@ def donustur_dikey():
             for harf in girdi_metni:
                 if harf in turkce_karakterler.keys():   # Girdi içerisinde Türkçe karakter varsa, kod hata vermesin alfabede ona yakın karakteri kullansın. Ör: ş yerine s, Ğ yerine G, ...vb
                     harf = turkce_karakterler[harf]
-                sonuc += sozluk[harf + str(i)] + "   "
-            sonuc += "\n"
-   
-    else:                                       # "standart" isimli yazıtipi içerisinden 331 karakter var. Bu durumda, girdide yazılan kelimeleri olduğu gibi (karakterleri değiştirmeden) kullan.
-        for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
-            for harf in girdi_metni:
-                sonuc += sozluk[harf + str(i)] + "   "
-            sonuc += "\n"
-        
-    suslu_metin = sonuc.replace("$", " ")        # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
+
+        for harf in girdi_metni:
+            for sayi in range(1, yuk+1):
+                sonuc = sozluk[harf + str(sayi)].replace("$", " ")
+                sonuc_harf = sonuc + "\n"
+                cikti.insert(tk.END, sonuc_harf)
+            cikti.insert(tk.END, "\n")
+            
     
-    for harf in suslu_metin:
-        cikti.insert(tk.END, harf)
+    else:                                       # "standart" isimli yazıtipi içerisinden 331 karakter var. Bu durumda, girdide yazılan kelimeleri olduğu gibi (karakterleri değiştirmeden) kullan.
+        for harf in girdi_metni:
+            for sayi in range(1, yuk+1):
+                sonuc = sozluk[harf + str(sayi)].replace("$", " ")
+                sonuc_harf = sonuc + "\n"
+                cikti.insert(tk.END, sonuc_harf)
+            cikti.insert(tk.END, "\n")
 
 def temizle():
    girdi.delete(0,tk.END)
