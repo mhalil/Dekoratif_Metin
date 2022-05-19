@@ -17,18 +17,6 @@ Ayrıca, http://www.figlet.org/ adresinde paylaşılan yazıtipi dosyalarını k
 #   #  #   #  #        #    #      
 #   #  #   #  #####  #####  ##### 
 
-
-*   *    *    *        *    *      
-*   *   * *   *             *      
-*   *  *   *  *      *****  *      
-*   *  *   *  *        *    *      
-*****  *   *  *        *    *      
-*   *  *****  *        *    *      
-*   *  *   *  *        *    *      
-*   *  *   *  *        *    *      
-*   *  *   *  *****  *****  ***** 
-
-
 X   X    X    X        X    X      
 X   X   X X   X             X      
 X   X  X   X  X      XXXXX  X      
@@ -82,3 +70,18 @@ H:::::::H     H:::::::H A:::::A                 A:::::A L::::::::::::::::::::::L
 HHHHHHHHH     HHHHHHHHHAAAAAAA                   AAAAAAALLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIILLLLLLLLLLLLLLLLLLLLLLLL
                                                                                                                  
 ```
+## UYGULAMA ARABİRİMİ
+
+Kodlar, **tkinter** modulü ile Görsel Arabirime kavuştu.
+Uygulamayı görsel arabirim ile kullanmak mümkün.
+
+![Arabirim_1](Arabirim_v3_1.png)
+![Arabirim_2](Arabirim_v3_2.png)
+
+## MEVCUT FONKSİYONLAR
+
+* Girilen Metni **YATAY** olarak Dekore Etmek
+* Girilen Metni **DİKEY** olarak Dekore Etmek
+* Girilen Metni ve Dekore Edilmiş Metni **TEMİZLEMEK**
+* Dekore edilmiş Metni, Panoya **KOPYALAMAK**
+* Dekore edilmiş Metni, Çalışma Dizinine **KAYDETMEK**

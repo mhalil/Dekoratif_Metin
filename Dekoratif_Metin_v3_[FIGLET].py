@@ -69,7 +69,7 @@ def alfabe_sozluk():
 
 ## BUTON Fonksiyonları
 # Kullanıcı metin yazıp, Listeden Yazitipi seçtikten sonra, Yazılan metni, seçilen yazıtipi kodlarına çevirerek cikti ekranına yazdıran fonksiyon.
-def donustur():                                        
+def donustur_yatay():                                        
 
     yuk = ky()                                  # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
     sozluk = alfabe_sozluk()                    # alfabe_sozluk() fonksiyonunu çalıştır ve sozluk isimli değişkene ata.                                       
@@ -130,8 +130,6 @@ def donustur_dikey():
 def temizle():
    girdi.delete(0,tk.END)
    cikti.delete("1.0",tk.END)
-   cikti.configure(width = 60)
-   pencere.geometry("505x450+500+300")
 
 def kaydet():
    pass
@@ -142,30 +140,30 @@ def kopyala():    # Cikti penceresindeki Metni Panoya (clipboard'da) kopyalar
 
 # ARABİRİM
 pencere = tk.Tk()
-pencere.geometry("505x450+500+300")
+pencere.geometry("605x450+500+300")
 pencere.resizable(0, 0)
 pencere.title(".:: Dekoratif Metin [ FIGLET ] ::.")
 
 etiket_girdi = tk.Label(pencere, text = "Dönüştürülecek Metni Yazın:")
 etiket_girdi.place(x=10, y=10)
 
-girdi = tk.Entry(pencere, width=25)
+girdi = tk.Entry(pencere, width=35)
 girdi.focus()
 girdi.place(x=10, y=40)
 
 aciklama = tk.Label(text = "Kullanmak istediğiniz Yazıtipini seçin.")
-aciklama.place(x=240, y=10)
+aciklama.place(x=325, y=10)
 
 # Yazıtipi Listesi
 secili_yazitipi = tk.StringVar()
-yazitipi = ttk.Combobox(pencere, textvariable=secili_yazitipi, width=28)
+yazitipi = ttk.Combobox(pencere, textvariable=secili_yazitipi, width=30)
 yazitipi["values"] = ("Banner3", "Colossal", "Doh", "Epic", "Isometric1", "Isometric2", "Isometric3", "Isometric4", "Standard", "Univers")
 yazitipi['state'] = 'readonly'
 yazitipi.set("Banner3")
-yazitipi.place(x=240, y=40)
+yazitipi.place(x=325, y=40)
 
 # Sonucun yazdırılacağı Metin ekranı
-cikti = tk.Text(pencere, width=57, height=17, wrap=NONE)
+cikti = tk.Text(pencere, width=70, height=17, wrap=NONE)
 cikti.place(x=30, y=80)
 
 dikey_kaydirma = Scrollbar(pencere)
@@ -175,7 +173,7 @@ dikey_kaydirma.config(command=cikti.yview)
 cikti['yscrollcommand'] = dikey_kaydirma.set
 
 yatay_kaydirma = Scrollbar(pencere)
-yatay_kaydirma.place(x=30, y=380, width=450)
+yatay_kaydirma.place(x=35, y=380, width=560)
 yatay_kaydirma["orient"] = "horizontal"
 yatay_kaydirma.config(command=cikti.xview)
 cikti['xscrollcommand'] = yatay_kaydirma.set
@@ -183,35 +181,41 @@ cikti['xscrollcommand'] = yatay_kaydirma.set
 # Butonlar
 buton_genisligi = 8
 
-btn_donustur = tk.Button(pencere, 
-                        text="Dönüştür",
+btn_donustur_y = tk.Button(pencere, 
+                        text="Yatay",
                         width=buton_genisligi,
-                        command=donustur)
-btn_donustur.place(x=10, y=415)                     
+                        command=donustur_yatay)
+btn_donustur_y.place(x=10, y=415)                     
+
+btn_donustur_d = tk.Button(pencere, 
+                        text="Dikey",
+                        width=buton_genisligi,
+                        command=donustur_dikey)
+btn_donustur_d.place(x=108, y=415)  
 
 btn_temizle = tk.Button(pencere, 
                         text="Temizle",
                         width=buton_genisligi,
                         command=temizle)
-btn_temizle.place(x=108, y=415)  
+btn_temizle.place(x=206, y=415)  
 
 btn_kopyala = tk.Button(pencere, 
                         text="Kopyala",
                         width=buton_genisligi,
                         command=kopyala)
-btn_kopyala.place(x=206, y=415)  
+btn_kopyala.place(x=304, y=415)  
 
 btn_kaydet = tk.Button(pencere, 
-                        text="donustur_dikey",
+                        text="Kaydet",
                         width=buton_genisligi,
-                        command=donustur_dikey)
-btn_kaydet.place(x=304, y=415)                     
+                        command=kaydet)
+btn_kaydet.place(x=402, y=415)                     
 
 btn_kapat = tk.Button(pencere, 
                         text="Kapat",
                         width=buton_genisligi,
                         command=quit)
-btn_kapat.place(x=402, y=415)
+btn_kapat.place(x=500, y=415)
 
 
 pencere.mainloop()
