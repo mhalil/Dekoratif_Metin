@@ -79,7 +79,7 @@ def sonuc():                                        # Kullanıcıdan Yazitipi me
     sonuc = ""                                  # sonuc isimli boş bir string oluştur.
     
     if secim != "9":                            # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
-        turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S",  "ö" : "o", "Ö" : "O"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
+        turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S",  "ö" : "o", "Ö" : "O", "ü" : "u", "Ü" : "U"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
 
         for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
             for harf in girdi:
