@@ -1,13 +1,12 @@
-# DİJİTAL METİN
+# DEKORATİF METİN
+
 Kullanıcının yazdığı metni #, *, $, %, ...vb karakterlerle 9 satır yüksekliğinde metne çeviren python kodu.
 Ayrıca, http://www.figlet.org/ adresinde paylaşılan yazıtipi dosyalarını kullanarak benzer çıktılar üreten python kodu yazmaya çalışacağım.
 
 
-### Örnek metin ve çıktılar;
+## ÖRNEK ÇIKTILAR (KONSOL EKRANDA);
 
 ```
-metin yazın: halil
-
 #   #    #    #        #    #      
 #   #   # #   #             #      
 #   #  #   #  #      #####  #      
@@ -40,16 +39,6 @@ X   X  X   X  X        X    X
 X   X  X   X  X        X    X      
 X   X  X   X  XXXXX  XXXXX  XXXXX
 
-
-=   =    =    =        =    =      
-=   =   = =   =             =      
-=   =  =   =  =      =====  =      
-=   =  =   =  =        =    =      
-=====  =   =  =        =    =      
-=   =  =====  =        =    =      
-=   =  =   =  =        =    =      
-=   =  =   =  =        =    =      
-=   =  =   =  =====  =====  ===== 
 
 FIGLET ÖRNEKLERİ:
 
