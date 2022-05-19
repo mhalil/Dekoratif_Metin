@@ -53,7 +53,7 @@ def alfabe_sozluk():
     alfabe_key = list()                             # alfabe_key isimi boş bir liste oluştur.
     alfabe = dict()                                 # alfabe isimi boş bir sözlük yapısı oluştur.
     
-    if y_tipi == "Standard":
+    if y_tipi == "fonts/standard.flf":
         for k in karakterler_standard:              # Karakterlere sayı numarası eklenip alfabe_key listesine kaydeden döngü yapısı.
             for l in range(1,krt_yuk+1):            # Sayılar 1'den başlayarak karakter (satır) yüksekliğine kadar devam edecek.
                 alfabe_key.append(k+str(l))         # listeye ekle. Ör: A1, A2, A3, ..., z1, z2, z3...vb
@@ -76,9 +76,9 @@ def donustur():
     girdi_metni = girdi.get()                   # Kullanıcıdan bir metin girmesini iste.
     sonuc = ""                                  # sonuc isimli boş bir string oluştur.
     
-    y_tipi = "fonts/" + yazitipi.get().lower() + ".flf"
+    y_tipi_adi = yazitipi.get()                 # Açılır listede seçili olan yazıtipi adı
 
-    if y_tipi != "Standard":                     # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
+    if y_tipi_adi != "Standard":                     # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
         turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
 
         for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
@@ -93,14 +93,39 @@ def donustur():
             for harf in girdi_metni:
                 sonuc += sozluk[harf + str(i)] + "   "
             sonuc += "\n"
-    
-    genislik = ky() * len(girdi.get()) * 2
-    
-    if genislik > 60:
-        cikti.configure(width=genislik)
         
     suslu_metin = sonuc.replace("$", " ")        # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
     cikti.insert(tk.END, suslu_metin)
+
+def donustur_dikey():                                        
+
+    yuk = ky()                                  # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
+    sozluk = alfabe_sozluk()                    # alfabe_sozluk() fonksiyonunu çalıştır ve sozluk isimli değişkene ata.                                       
+    girdi_metni = girdi.get()                   # Kullanıcıdan bir metin girmesini iste.
+    sonuc = ""                                  # sonuc isimli boş bir string oluştur.
+    
+    y_tipi_adi = yazitipi.get()                 # Açılır listede seçili olan yazıtipi adı
+
+    if y_tipi_adi != "Standard":                     # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
+        turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
+
+        for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
+            for harf in girdi_metni:
+                if harf in turkce_karakterler.keys():   # Girdi içerisinde Türkçe karakter varsa, kod hata vermesin alfabede ona yakın karakteri kullansın. Ör: ş yerine s, Ğ yerine G, ...vb
+                    harf = turkce_karakterler[harf]
+                sonuc += sozluk[harf + str(i)] + "   "
+            sonuc += "\n"
+    
+    else:                                       # "standart" isimli yazıtipi içerisinden 331 karakter var. Bu durumda, girdide yazılan kelimeleri olduğu gibi (karakterleri değiştirmeden) kullan.
+        for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
+            for harf in girdi_metni:
+                sonuc += sozluk[harf + str(i)] + "   "
+            sonuc += "\n"
+        
+    suslu_metin = sonuc.replace("$", " ")        # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
+    
+    for harf in suslu_metin:
+        cikti.insert(tk.END, harf)
 
 def temizle():
    girdi.delete(0,tk.END)
@@ -119,7 +144,7 @@ def kopyala():    # Cikti penceresindeki Metni Panoya (clipboard'da) kopyalar
 pencere = tk.Tk()
 pencere.geometry("505x450+500+300")
 pencere.resizable(0, 0)
-pencere.title(".:: Metni Süsle [ FIGLET ] ::.")
+pencere.title(".:: Dekoratif Metin [ FIGLET ] ::.")
 
 etiket_girdi = tk.Label(pencere, text = "Dönüştürülecek Metni Yazın:")
 etiket_girdi.place(x=10, y=10)
@@ -140,7 +165,7 @@ yazitipi.set("Banner3")
 yazitipi.place(x=240, y=40)
 
 # Sonucun yazdırılacağı Metin ekranı
-cikti = tk.Text(pencere, width=57, height=17)
+cikti = tk.Text(pencere, width=57, height=17, wrap=NONE)
 cikti.place(x=30, y=80)
 
 dikey_kaydirma = Scrollbar(pencere)
@@ -150,7 +175,7 @@ dikey_kaydirma.config(command=cikti.yview)
 cikti['yscrollcommand'] = dikey_kaydirma.set
 
 yatay_kaydirma = Scrollbar(pencere)
-yatay_kaydirma.place(x=10, y=380, width=480)
+yatay_kaydirma.place(x=30, y=380, width=450)
 yatay_kaydirma["orient"] = "horizontal"
 yatay_kaydirma.config(command=cikti.xview)
 cikti['xscrollcommand'] = yatay_kaydirma.set
@@ -177,9 +202,9 @@ btn_kopyala = tk.Button(pencere,
 btn_kopyala.place(x=206, y=415)  
 
 btn_kaydet = tk.Button(pencere, 
-                        text="Kaydet",
+                        text="donustur_dikey",
                         width=buton_genisligi,
-                        command=kaydet)
+                        command=donustur_dikey)
 btn_kaydet.place(x=304, y=415)                     
 
 btn_kapat = tk.Button(pencere, 
