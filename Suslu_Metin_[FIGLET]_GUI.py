@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 
-
+## FONKSİYONLAR
 # Yazıtipini oluşturan karakterlerin yuksekligi (her karakterin kaç satırdan oluştuğunu) hesaplayan fonksiyon.
 def ky():                                           
     yukseklik = 0                                   # Karakter Yüksekliği (satır sayısı) 
@@ -18,7 +18,6 @@ def ky():
                 yukseklik += 1                      # karakter yüksekliği sonlanmamışsa (sınırlanmamışsa) yükseklik değerini bir artır.
                  
     return (yukseklik+1)                            # Yazıtipinin karakter yüksekliğini fonksiyona değer olarak ata.
-
 
 # Belirtilen yazitipi dosyasındaki "@\n" ve "@@\n" karakterlerini silerek liste oluştur.
 def listele():                                      
@@ -43,7 +42,6 @@ def listele():
                   
     return alfabe_kodlari                           # Alfabeyi oluşturan kodlara ait listeyi, fonksiyona değer olarak ata.
 
-
 # Yazıtipi dosyalarında bulunan sıralı karakter bilgisi.
 def alfabe_sozluk():
     y_tipi = "fonts/" + yazitipi.get().lower() + ".flf"
@@ -55,7 +53,7 @@ def alfabe_sozluk():
     alfabe_key = list()                             # alfabe_key isimi boş bir liste oluştur.
     alfabe = dict()                                 # alfabe isimi boş bir sözlük yapısı oluştur.
     
-    if y_tipi == "standard":
+    if y_tipi == "Standard":
         for k in karakterler_standard:              # Karakterlere sayı numarası eklenip alfabe_key listesine kaydeden döngü yapısı.
             for l in range(1,krt_yuk+1):            # Sayılar 1'den başlayarak karakter (satır) yüksekliğine kadar devam edecek.
                 alfabe_key.append(k+str(l))         # listeye ekle. Ör: A1, A2, A3, ..., z1, z2, z3...vb
@@ -69,7 +67,8 @@ def alfabe_sozluk():
 
     return alfabe                                   # Oluşturulan alfabe isimli sözlüğü fonksiyona değer olarak ata.
 
-# Kullanıcıdan Yazitipi menüsünden seçim yapmasını ve bir metin yazmasını isteyen; Yazılan metni, seçilen yazıtipi kodlarına çevirerek ekrana yazdıran fonksiyon.
+## BUTON Fonksiyonları
+# Kullanıcı metin yazıp, Listeden Yazitipi seçtikten sonra, Yazılan metni, seçilen yazıtipi kodlarına çevirerek cikti ekranına yazdıran fonksiyon.
 def donustur():                                        
 
     yuk = ky()                                  # ky() fonksiyonunu çalıştırarak, karakter (satır) yüksekliğini hesaplaya ve yuk isimli değişkene ata.
@@ -79,7 +78,7 @@ def donustur():
     
     y_tipi = "fonts/" + yazitipi.get().lower() + ".flf"
 
-    if y_tipi != "standard":                     # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
+    if y_tipi != "Standard":                     # "standard" isimli yazıtiplerinde daha az sayıda karakter var, eğer o yazıtipleri seçilirse Türkçe karakterler yerine diğer karakterleri kullan.
         turkce_karakterler = {"ç" : "c", "Ç" : "C", "ğ" : "g", "Ğ" : "G", "ı" : "i", "İ" : "I", "ş" : "s", "Ş" : "S"}       # hangi harfe yerine hangi hrf kullanılacak, onu belirle.
 
         for i in range(1, yuk+1):               # Kullanıcının yazdığı metni sozluk yapısından sorgulayarak her karaktere karşılık gelen kodları sonuc isimli stringe ekleyen döngü yapısı.
@@ -99,19 +98,9 @@ def donustur():
     
     if genislik > 60:
         cikti.configure(width=genislik)
-        yeni_genislik = str(genislik * 8) + "x450"
-        pencere.geometry(yeni_genislik)
         
     suslu_metin = sonuc.replace("$", " ")        # sonuc isimli stringdeki (karakter sonlarındaki) $ karakterini silerek sonucu ekrna yazdır.
     cikti.insert(tk.END, suslu_metin)
-    
-
-# Buton Fonksiyonları
-
-def donustur_():
-   cikti.insert(tk.END,girdi.get() + "\n")
-   cikti.insert(tk.END,yazitipi.get() + "\n")
-   cikti.insert(tk.END,"fonts/" + yazitipi.get() + ".flf\n")
 
 def temizle():
    girdi.delete(0,tk.END)
@@ -129,7 +118,7 @@ def kopyala():    # Cikti penceresindeki Metni Panoya (clipboard'da) kopyalar
 # ARABİRİM
 pencere = tk.Tk()
 pencere.geometry("505x450+500+300")
-# pencere.resizable(0, 0)
+pencere.resizable(0, 0)
 pencere.title(".:: Metni Süsle [ FIGLET ] ::.")
 
 etiket_girdi = tk.Label(pencere, text = "Dönüştürülecek Metni Yazın:")
@@ -151,8 +140,20 @@ yazitipi.set("Banner3")
 yazitipi.place(x=240, y=40)
 
 # Sonucun yazdırılacağı Metin ekranı
-cikti = tk.Text(pencere, width=60, height=19)
-cikti.place(x=10, y=80)
+cikti = tk.Text(pencere, width=57, height=17)
+cikti.place(x=30, y=80)
+
+dikey_kaydirma = Scrollbar(pencere)
+dikey_kaydirma.place(x=10, y=80, height=300)
+dikey_kaydirma["orient"] = "vertical"
+dikey_kaydirma.config(command=cikti.yview)
+cikti['yscrollcommand'] = dikey_kaydirma.set
+
+yatay_kaydirma = Scrollbar(pencere)
+yatay_kaydirma.place(x=10, y=380, width=480)
+yatay_kaydirma["orient"] = "horizontal"
+yatay_kaydirma.config(command=cikti.xview)
+cikti['xscrollcommand'] = yatay_kaydirma.set
 
 # Butonlar
 buton_genisligi = 8
