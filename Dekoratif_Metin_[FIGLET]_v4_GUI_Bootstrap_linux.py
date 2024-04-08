@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
 import ttkbootstrap as ttk
-from ttkbootstrap import Style
 
 ## FONKSİYONLAR
 # Yazıtipini oluşturan karakterlerin yuksekligi (her karakterin kaç satırdan oluştuğunu) hesaplayan fonksiyon.
@@ -189,47 +188,49 @@ yatay_kaydirma.config(command=cikti.xview)
 cikti['xscrollcommand'] = yatay_kaydirma.set
 
 # Butonlar
-buton_genisligi = 10
+buton_genisligi = 11
+x_konum = 24
+x_artis = 115
 
 btn_donustur_y = ttk.Button(pencere, 
                         text="Yatay",
                         width=buton_genisligi,
                         command=donustur_yatay)
-btn_donustur_y.place(x=10, y=610)                     
+btn_donustur_y.place(x=x_konum, y=610)                     
 
 btn_donustur_d = ttk.Button(pencere, 
                         text="Dikey",
                         width=buton_genisligi,
                         command=donustur_dikey)
-btn_donustur_d.place(x=130, y=610)  
+btn_donustur_d.place(x=x_konum + x_artis, y=610)  
 
 btn_temizle = ttk.Button(pencere, 
                         bootstyle="success",
                         text="Temizle",
                         width=buton_genisligi,
                         command=temizle)
-btn_temizle.place(x=250, y=610)  
+btn_temizle.place(x=x_konum + x_artis * 2, y=610)  
 
 btn_kopyala = ttk.Button(pencere,
                         bootstyle="success", 
                         text="Kopyala",
                         width=buton_genisligi,
                         command=kopyala)
-btn_kopyala.place(x=370, y=610)  
+btn_kopyala.place(x=x_konum + x_artis * 3, y=610)  
 
 btn_kaydet = ttk.Button(pencere,
                         bootstyle="dark", 
                         text="Kaydet",
                         width=buton_genisligi,
                         command=kaydet)
-btn_kaydet.place(x=490, y=610)                     
+btn_kaydet.place(x=x_konum + x_artis * 4, y=610)                     
 
 btn_kapat = ttk.Button(pencere,
                         bootstyle="danger", 
                         text="Kapat",
                         width=buton_genisligi,
                         command=quit)
-btn_kapat.place(x=610, y=610)
+btn_kapat.place(x=x_konum + x_artis * 5, y=610)
 
 
 pencere.mainloop()
