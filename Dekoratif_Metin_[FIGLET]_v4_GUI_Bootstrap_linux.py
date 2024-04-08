@@ -1,8 +1,8 @@
 import tkinter as tk
-# from tkinter import ttk
 from tkinter import messagebox
 from tkinter import *
 import ttkbootstrap as ttk
+from ttkbootstrap import Style
 
 ## FONKSİYONLAR
 # Yazıtipini oluşturan karakterlerin yuksekligi (her karakterin kaç satırdan oluştuğunu) hesaplayan fonksiyon.
@@ -43,7 +43,7 @@ def listele():
                     alfabe_kodlari.append(i[:-3])
                   
     return alfabe_kodlari                           # Alfabeyi oluşturan kodlara ait listeyi, fonksiyona değer olarak ata.
-
+print("listele:", listele)
 # Yazıtipi dosyalarında bulunan sıralı karakter bilgisi.
 def alfabe_sozluk():
     y_tipi = "fonts/" + yazitipi.get().lower() + ".flf"
@@ -66,7 +66,7 @@ def alfabe_sozluk():
 
     for i in range(len(alfabe_kod)):                # alfabe_kod listesindeki öğeleri, alfabe_key listesindek öğelerle sırasına uygun olarak eşleştirip alfabe isimli sözlüğe ekleyen döngü yapısı. Ör: {'a1' : '## # #' }
         alfabe[alfabe_key[i]] = alfabe_kod[i]
-
+    
     return alfabe                                   # Oluşturulan alfabe isimli sözlüğü fonksiyona değer olarak ata.
 
 ## BUTON Fonksiyonları
@@ -133,7 +133,6 @@ def donustur_dikey():           # Kullanıcı metin yazıp, Listeden Yazitipi se
                 cikti.insert(tk.END, sonuc_harf)
             cikti.insert(tk.END, "\n")
 
-
 def temizle():  # girdi ve çıktı ekranlarını temizleyen fonksiyon.
    girdi.delete(0,tk.END)
    cikti.delete("1.0",tk.END)
@@ -147,48 +146,45 @@ def kaydet():   # çıktı ekranındaki dekoratif metni "Dekoratif_Metin.txt" is
     else:
         messagebox.showinfo("Kaydedilecek Veri Yok!","Dekoratif Metin Üretilmediği için, kayıt işlemi gerçekleştirilemiyor.")
 
-
 def kopyala():  # Cikti penceresindeki Metni Panoya (clipboard'da) kopyalar
     pencere.clipboard_clear()
     pencere.clipboard_append(cikti.get('1.0', tk.END).rstrip())
 
 # ARABİRİM
 pencere = tk.Tk()
-pencere.geometry("740x650+500+200")
+pencere.geometry("735x650+500+200")
 pencere.resizable(0, 0)
 pencere.title(".:: Dekoratif Metin [ FIGLET ] ::.")
 
 etiket_girdi = tk.Label(pencere, text = "Dönüştürülecek Metni Yazın:")
 etiket_girdi.place(x=10, y=10)
 
-girdi = ttk.Entry(pencere, bootstyle="primary", width=45)
+girdi = ttk.Entry(pencere, width=50, bootstyle="success")
 girdi.focus()
 girdi.place(x=10, y=40)
 
 aciklama = tk.Label(text = "Kullanmak istediğiniz Yazıtipini seçin.")
-aciklama.place(x=425, y=10)
+aciklama.place(x=455, y=10)
 
 # Yazıtipi Listesi
 secili_yazitipi = tk.StringVar()
-yazitipi = ttk.Combobox(pencere, bootstyle="primary", textvariable=secili_yazitipi, width=30)
+yazitipi = ttk.Combobox(pencere, textvariable=secili_yazitipi, width=30, bootstyle="success")
 yazitipi["values"] = ("Banner3", "Colossal", "Doh", "Epic", "Isometric1", "Isometric2", "Isometric3", "Isometric4", "Standard", "Univers")
 yazitipi['state'] = 'readonly'
 yazitipi.set("Banner3")
-yazitipi.place(x=425, y=40)
+yazitipi.place(x=455, y=40)
 
 # Sonucun yazdırılacağı Metin ekranı
-cikti = tk.Text(pencere, width=85, height=25, wrap=NONE, font="Consola 12")
+cikti = tk.Text(pencere, width=85, height=32, wrap=NONE, font="Courier 10") # Consolas, Courier, CourierNew, Fixedsys, yazıtipleri de uygun
 cikti.place(x=30, y=80)
 
-dikey_kaydirma = Scrollbar(pencere)
+dikey_kaydirma = ttk.Scrollbar(pencere, orient="vertical", bootstyle="secondary-round")
 dikey_kaydirma.place(x=10, y=80, height=500)
-dikey_kaydirma["orient"] = "vertical"
 dikey_kaydirma.config(command=cikti.yview)
 cikti['yscrollcommand'] = dikey_kaydirma.set
 
-yatay_kaydirma = Scrollbar(pencere)
-yatay_kaydirma.place(x=35, y=580, width=690)
-yatay_kaydirma["orient"] = "horizontal"
+yatay_kaydirma = ttk.Scrollbar(pencere, orient="horizontal", bootstyle="secondary-round")
+yatay_kaydirma.place(x=30, y=590, width=700)
 yatay_kaydirma.config(command=cikti.xview)
 cikti['xscrollcommand'] = yatay_kaydirma.set
 
@@ -196,46 +192,44 @@ cikti['xscrollcommand'] = yatay_kaydirma.set
 buton_genisligi = 10
 
 btn_donustur_y = ttk.Button(pencere, 
-                        bootstyle="primary",
                         text="Yatay",
                         width=buton_genisligi,
                         command=donustur_yatay)
-btn_donustur_y.place(x=10, y=605)                     
+btn_donustur_y.place(x=10, y=610)                     
 
 btn_donustur_d = ttk.Button(pencere, 
-                            bootstyle="primary",
                         text="Dikey",
                         width=buton_genisligi,
                         command=donustur_dikey)
-btn_donustur_d.place(x=130, y=605)  
+btn_donustur_d.place(x=130, y=610)  
 
 btn_temizle = ttk.Button(pencere, 
-                         bootstyle="warning",
+                        bootstyle="success",
                         text="Temizle",
                         width=buton_genisligi,
                         command=temizle)
-btn_temizle.place(x=250, y=605)  
+btn_temizle.place(x=250, y=610)  
 
-btn_kopyala = ttk.Button(pencere, 
-                         bootstyle="warning",
+btn_kopyala = ttk.Button(pencere,
+                        bootstyle="success", 
                         text="Kopyala",
                         width=buton_genisligi,
                         command=kopyala)
-btn_kopyala.place(x=370, y=605)  
+btn_kopyala.place(x=370, y=610)  
 
-btn_kaydet = ttk.Button(pencere, 
-                       bootstyle="dark",
+btn_kaydet = ttk.Button(pencere,
+                        bootstyle="dark", 
                         text="Kaydet",
                         width=buton_genisligi,
                         command=kaydet)
-btn_kaydet.place(x=490, y=605)                     
+btn_kaydet.place(x=490, y=610)                     
 
-btn_kapat = ttk.Button(pencere, 
-                        bootstyle="danger",
+btn_kapat = ttk.Button(pencere,
+                        bootstyle="danger", 
                         text="Kapat",
                         width=buton_genisligi,
                         command=quit)
-btn_kapat.place(x=610, y=605)
+btn_kapat.place(x=610, y=610)
 
 
 pencere.mainloop()
