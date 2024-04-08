@@ -84,8 +84,8 @@ Uygulamayı görsel arabirim ile kullanmak mümkün.
 ![Arabirim_1](Arabirim_v3_1.png)
 ![Arabirim_2](Arabirim_v3_2.png)
 
-![Arabirim_2](Arabirim_v4_1.png)
-![Arabirim_2](Arabirim_v4_2.png)
+![Arabirim_3](Arabirim_v4_1.png)
+![Arabirim_4](Arabirim_v4_2.png)
 
 ## MEVCUT FONKSİYONLAR
 
