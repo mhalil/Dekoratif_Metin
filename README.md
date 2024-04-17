@@ -32,9 +32,11 @@ X   X  XXXXX  X        X    X
 X   X  X   X  X        X    X      
 X   X  X   X  X        X    X      
 X   X  X   X  XXXXX  XXXXX  XXXXX
+```
 
+### FIGLET ÖRNEKLERİ:
 
-FIGLET ÖRNEKLERİ:
+```
 
       ___           ___                                             
      /__/\         /  /\                      ___                   
@@ -75,15 +77,21 @@ FIGLET ÖRNEKLERİ:
 ```
 ## UYGULAMA ARABİRİMİ
 
-Kodlar, **tkinter** modulü ile Görsel Arabirime kavuştu.
+Kodlar, **tkinter** ve **ttkbootstrap** modulleri ile Görsel Arabirime kavuştu.
 Uygulamayı görsel arabirim ile kullanmak mümkün.
 
+### v3 ekran görüntüleri;
 ![Arabirim_1](Arabirim_v3_1.png)
 ![Arabirim_2](Arabirim_v3_2.png)
 
+### v4 ekran görüntüleri (linux);
 ![Arabirim_3](Arabirim_v4_1.png)
 ![Arabirim_4](Arabirim_v4_2.png)
-![Arabirim_4](Arabirim_v4_3.png)
+![Arabirim_5](Arabirim_v4_3.png)
+
+### v4 ekran görüntüleri (windows);
+![Arabirim_6](Arabirim_v4_4_win.png)
+![Arabirim_7](Arabirim_v4_5_win.png)
 
 ## MEVCUT FONKSİYONLAR
 
