@@ -81,17 +81,17 @@ Kodlar, **tkinter** ve **ttkbootstrap** modulleri ile Görsel Arabirime kavuştu
 Uygulamayı görsel arabirim ile kullanmak mümkün.
 
 ### v3 ekran görüntüleri;
-![Arabirim_1](Arabirim_v3_1.png)
-![Arabirim_2](Arabirim_v3_2.png)
+![Arabirim_1](img/Arabirim_v3_1.png)
+![Arabirim_2](img/Arabirim_v3_2.png)
 
 ### v4 ekran görüntüleri (linux);
-![Arabirim_3](Arabirim_v4_1.png)
-![Arabirim_4](Arabirim_v4_2.png)
-![Arabirim_5](Arabirim_v4_3.png)
+![Arabirim_3](img/Arabirim_v4_1.png)
+![Arabirim_4](img/Arabirim_v4_2.png)
+![Arabirim_5](img/Arabirim_v4_3.png)
 
 ### v4 ekran görüntüleri (windows);
-![Arabirim_6](Arabirim_v4_4_win.png)
-![Arabirim_7](Arabirim_v4_5_win.png)
+![Arabirim_6](img/Arabirim_v4_4_win.png)
+![Arabirim_7](img/Arabirim_v4_5_win.png)
 
 ## MEVCUT FONKSİYONLAR
 
